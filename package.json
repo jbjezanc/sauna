@@ -1,0 +1,17 @@
+{
+  "name": "sauna",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Josip Bježanćević",
+  "license": "ISC",
+  "description": "Coding challenge for Software Sauna https://github.com/softwaresauna/code-challenge",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3"
+  }
+}
