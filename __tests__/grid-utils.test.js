@@ -106,6 +106,10 @@ describe('GridUtils module', () => {
     })
 
     it('should return null for an invalid point', () => {
+      expect(GridUtils.getCharacterAt([1, 0], grid)).toBeNull()
+    })
+
+    it('should return null for a point out of the bounds', () => {
       expect(GridUtils.getCharacterAt([2, 0], grid)).toBeNull()
     })
   })
