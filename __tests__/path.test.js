@@ -115,7 +115,7 @@ describe('Path module', () => {
 
       expect(() => {
         Path.handleTurnPosition(currentPoint, nextPoints, currentDirection, visited)
-      }).toThrow('Fake turn.')
+      }).toThrow('Fake turn')
     })
 
     it('should throw "Fork in path" error when multiple valid turns exist', () => {
@@ -133,7 +133,7 @@ describe('Path module', () => {
 
       expect(() => {
         Path.handleTurnPosition(currentPoint, nextPoints, currentDirection, visited)
-      }).toThrow('Fork in path.')
+      }).toThrow('Fork in path')
     })
   })
   describe('handleRegularPosition', () => {
