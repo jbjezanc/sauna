@@ -3,7 +3,7 @@
  * @typedef {Array<Array<string|null>>} Grid - 2D grid of characters or null values
  * @typedef {Object} GridPoint
  * @property {Point} location - The location of the point in the grid
- * @property {string} char - The character at this location
+ * @property {string} char - The charcter at this location
  * @typedef {Object} Direction
  * @property {number} row - Row offset
  * @property {number} col - Column offset

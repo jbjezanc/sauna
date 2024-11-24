@@ -19,7 +19,7 @@ import {
  * @property {Object} [validationDetails] - Additional validation details
  */
 
-const GridTester = {
+export const GridTester = {
   /**
    * Tests a single grid and returns detailed results
    * @param {Grid} grid - The grid to test
@@ -27,8 +27,9 @@ const GridTester = {
    * @returns {TestResult} The test results
    */
   testGrid(grid, gridName) {
-    console.log(`\n✜ Testing Grid: ${gridName}`)
-    console.log('-'.repeat(50))
+    // Keep the logs for the manual test
+    // console.log(`\n✜ Testing Grid: ${gridName}`)
+    // console.log('-'.repeat(50))
 
     try {
       // Validate grid structure and special characters
@@ -52,26 +53,27 @@ const GridTester = {
     }
   },
 
+  // Keep this for the manual test.
   /**
    * Pretty prints the test results
    * @param {TestResult} result - The test results to print
    */
   printResults(result) {
     if (result.success) {
-      console.log('✅ Test passed successfully!')
-      console.log(
-        'Grid Dimensions:',
-        `${result.validationDetails.dimensions.rows}x${result.validationDetails.dimensions.cols}`
-      )
-      console.log('Start Point:', result.validationDetails.startPoint.location)
-      console.log('End Point:', result.validationDetails.endPoint.location)
-      console.log('Path Length:', result.path.length)
-      console.log('Visited Path:', result.path)
+      //   console.log('✅ Test passed successfully!')
+      //   console.log(
+      //     'Grid Dimensions:',
+      //     `${result.validationDetails.dimensions.rows}x${result.validationDetails.dimensions.cols}`
+      //   )
+      //   console.log('Start Point:', result.validationDetails.startPoint.location)
+      //   console.log('End Point:', result.validationDetails.endPoint.location)
+      //   console.log('Path Length:', result.path.length)
+      // console.log('Visited Path:', result.path.path.join(''))
     } else {
-      console.log('❌ Test failed!')
-      console.log('Error:', result.error)
+      // console.log('❌ Test failed!')
+      // console.log('Error:', result.error)
     }
-    console.log('\n')
+    // console.log('\n')
   },
 
   /**
@@ -84,8 +86,9 @@ const GridTester = {
     let passed = 0
     let failed = 0
 
-    console.log('✨ Starting Grid Tests')
-    console.log('='.repeat(50))
+    // Keep this for the manual test.
+    // console.log('✨ Starting Grid Tests (manual/non-automated test)')
+    // console.log('='.repeat(50))
 
     Object.entries(grids).forEach(([name, grid]) => {
       const result = this.testGrid(grid, name)
@@ -97,11 +100,11 @@ const GridTester = {
     })
 
     // Print summary
-    console.log('✐ Test Summary')
-    console.log('='.repeat(50))
-    console.log(`Total Tests: ${passed + failed}`)
-    console.log(`Passed: ${passed}`)
-    console.log(`Failed: ${failed}`)
+    // console.log('✐ Test Summary')
+    // console.log('='.repeat(50))
+    // console.log(`Total Tests: ${passed + failed}`)
+    // console.log(`Passed: ${passed}`)
+    // console.log(`Failed: ${failed}`)
 
     return {
       results,
@@ -119,5 +122,4 @@ const allGrids = {
 
 const allResults = GridTester.testMultipleGrids(allGrids)
 
-// Export the results if needed
 export const testResults = allResults

@@ -39,7 +39,7 @@ describe('Path module', () => {
     it('should detect multiple starting paths and throw', () => {
       const grid = [['x', '-', 'B', '-', '@', '-', 'A', '-', '-']]
       expect(() => Path.handleStartPosition([0, 4], grid)).toThrow(
-        'Multiple starting paths.'
+        'Multiple starting paths'
       )
     })
   })

@@ -9,12 +9,12 @@ import { GridUtils } from './grid-utils.js'
 export const GridValidator = {
   /** @type {Object.<string, string>} */
   ERROR_MESSAGES: {
-    NO_END: 'Missing end character.',
-    MULTIPLE_ENDS: 'Multiple end characters.',
-    NO_START: 'Missing start character.',
-    MULTIPLE_STARTS: 'Multiple starts.',
-    INVALID_GRID: 'Grid must be a non-empty 2D array.',
-    UNEVEN_ROWS: 'Grid must have rows of equal length.',
+    NO_END: 'Missing end character',
+    MULTIPLE_ENDS: 'Multiple end characters',
+    NO_START: 'Missing start character',
+    MULTIPLE_STARTS: 'Multiple starts',
+    INVALID_GRID: 'Grid must be a non-empty 2D array',
+    UNEVEN_ROWS: 'Grid must have rows of equal length',
   },
 
   /** @type {Object.<string, string>} */
@@ -44,7 +44,7 @@ export const GridValidator = {
   },
 
   /**
-   * Validates the presence and uniqueness of a special character in the grid
+   * Validates the presence and uniquenes of a special character in the grid
    * @param {Grid} grid - The grid to validate
    * @param {string} char - The special character to validate
    * @param {Object} errorMessages - Error messages for missing/multiple characters

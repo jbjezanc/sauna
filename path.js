@@ -26,7 +26,7 @@ export const Path = {
   handleStartPosition(currentPoint, grid) {
     const validNeighbors = GridUtils.findValidDirections(currentPoint, grid)
     if (validNeighbors.length > 1) {
-      throw new Error('Multiple starting paths.')
+      throw new Error('Multiple starting paths')
     }
     return validNeighbors[0] || null
   },
@@ -87,7 +87,7 @@ export const Path = {
 
     if (possibleTurns.length === 0) throw new Error('Fake turn')
     if (possibleTurns.length >= 2) throw new Error('Fork in path')
-  
+
     return possibleTurns[0]
   },
 
@@ -115,7 +115,7 @@ export const Path = {
    * @returns {Point[]} The visited path
    */
   findPath(startChar, grid) {
-    const start = GridUtils.findPoints(startChar, grid)[0].location
+    const start = GridUtils.findPoints(startChar, grid)[0]?.location
     const visited = [start]
     const path = [startChar]
     const letters = []
@@ -130,7 +130,8 @@ export const Path = {
       // Check success condition
       if (currentChar === 'x') {
         this.logResult('Success!', letters, path)
-        return visited
+        // return visited
+        return { visited, letters, path }
       }
 
       // Check for broken path
@@ -177,7 +178,7 @@ export const Path = {
         visited.push(currentPoint)
       } else {
         this.logResult('Failure', letters, path)
-        throw new Error('Broken path.')
+        throw new Error('Broken path')
       }
     }
   },
@@ -189,8 +190,9 @@ export const Path = {
    * @param {string[]} path - Path characters
    */
   logResult(status, letters, path) {
-    console.log(status)
-    console.log('Letters:', letters.map((l) => l.letter).join(''))
-    console.log('Path as characters:', path.join(''))
+    // Keep this for manual test script
+    // console.log(status)
+    // console.log('Letters:', letters.map((l) => l.letter).join(''))
+    // console.log('Path as characters:', path.join(''))
   },
 }
