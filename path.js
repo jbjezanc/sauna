@@ -88,10 +88,14 @@ export const Path = {
     if (possibleTurns.length === 0) throw new Error('Fake turn.')
     if (possibleTurns.length >= 2) throw new Error('Fork in path.')
 
-    return (
-      possibleTurns.find((p) => !visited.some((v) => v[0] === p[0] && v[1] === p[1])) ||
-      possibleTurns[0]
-    )
+    // TODO: Remove this - possible valid turns for '+' must be 1, and is guarded
+    // by the filtering out possible directions that are not perpendicular to the
+    // current direction in the previous step when we filtered out nextPoints.
+    // return (
+    //   possibleTurns.find((p) => !visited.some((v) => v[0] === p[0] && v[1] === p[1])) ||
+    //   possibleTurns[0]
+    // )
+    return possibleTurns[0]
   },
 
   /**
