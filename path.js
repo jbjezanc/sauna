@@ -82,12 +82,16 @@ export const Path = {
     const possibleTurns = nextPoints.filter((p) => {
       const newDir = GridUtils.subtractPoints(currentPoint, p)
       return (
+        // not going backwards
         !(p[0] === prevPoint?.[0] && p[1] === prevPoint?.[1]) &&
+        // new direction must be perpendicular to the current direction
         this.isPerpendicular(currentDirection, newDir)
       )
     })
 
+    // no valid turns
     if (possibleTurns.length === 0) throw new Error('Fake turn')
+    // multiple valid turns - not allowed
     if (possibleTurns.length >= 2) throw new Error('Fork in path')
 
     return possibleTurns[0]
@@ -105,6 +109,8 @@ export const Path = {
     const straightAhead = GridUtils.addPoints(currentPoint, currentDirection)
     const [prevPoint] = visited.slice(-2)
 
+    // if straight ahead movement is not valid, look for another point in nextPoints
+    // that is not the prevPoint (avoid moving backwards)
     return nextPoints.some((p) => p[0] === straightAhead[0] && p[1] === straightAhead[1])
       ? straightAhead
       : nextPoints.find((p) => !(p[0] === prevPoint?.[0] && p[1] === prevPoint?.[1]))
@@ -126,6 +132,9 @@ export const Path = {
     const letters = []
 
     let currentPoint = start
+    // validate the starting pont, now the current point to match allowed characters /^[A-Zx+\-|@]$/
+    GridUtils.isValidCell(currentPoint, grid)
+
     let currentChar = startChar
     let currentDirection = this.handleStartPosition(currentPoint, grid)
 
@@ -171,6 +180,8 @@ export const Path = {
 
       // Handle path continuation or failure
       if (nextPoint) {
+        // Validate the nextPoint if it is an allowed character  /^[A-Zx+\-|@]$/
+        GridUtils.isValidCell(nextPoint, grid)
         currentDirection = GridUtils.subtractPoints(currentPoint, nextPoint)
         currentPoint = nextPoint
         currentChar = grid[currentPoint[0]][currentPoint[1]]
