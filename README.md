@@ -232,16 +232,16 @@ Expected result: Error
 - turns can be letters or `+`
 - input examples are jagged matrices - rows (lines) don't contain the same number of elements (characters): this is a valid form of input so keep that in mind
 
-## How to test it
+# How to test it
 
-# Run all tests
+## Run all tests
 $ npm run test
 
-# Run only unit tests
+## Run only unit tests
 $ npm run test:unit
 
-# Run only integration tests
+## Run only integration tests
 $ npm run test:integration
 
-# Generate test coverage report
+## Generate test coverage report
 $ npm run test:coverage
