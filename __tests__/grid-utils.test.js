@@ -1,7 +1,7 @@
 import { GridUtils } from '../utils/grid-utils'
 
 describe('GridUtils module', () => {
-  describe('isInBounds', () => {
+  describe('GridUtils.isInBounds', () => {
     const grid = [
       ['@', '-', '-', '-', 'A', '-', '-', '-', '+'],
       [null, null, null, null, null, null, null, null, '|'],
@@ -13,16 +13,21 @@ describe('GridUtils module', () => {
     it('should return true for a point within bounds', () => {
       expect(GridUtils.isInBounds([0, 1], grid)).toBe(true)
     })
-
-    it('should return false for point(s) out of bounds', () => {
+    it('should return false for point(s) out of bounds: [-1, 0] (row out of bounds)', () => {
       expect(GridUtils.isInBounds([-1, 0], grid)).toBe(false)
+    })
+    it('should return false for point(s) out of bounds: [0, -1] (column out of bounds)', () => {
       expect(GridUtils.isInBounds([0, -1], grid)).toBe(false)
+    })
+    it('should return false for point(s) out of bounds: [10, 0] (row out of bounds)', () => {
       expect(GridUtils.isInBounds([10, 0], grid)).toBe(false)
+    })
+    it('should return false for point(s) out of bounds: [0, 10] (column out of bounds)', () => {
       expect(GridUtils.isInBounds([0, 10], grid)).toBe(false)
     })
   })
 
-  describe('isValidCell', () => {
+  describe('GridUtils.isValidCell', () => {
     const grid = [
       ['@', '-', '-', '-', 'A', '-', '-', '-', '+'],
       [null, null, null, null, null, null, null, null, '|'],
@@ -39,7 +44,7 @@ describe('GridUtils module', () => {
     })
   })
 
-  describe('findPoints', () => {
+  describe('GridUtils.findPoints', () => {
     const grid = [
       [null, '@', '-', '-', 'A', '-', '-', 'x'],
       [null, null, null, null, null, null, null, null],
@@ -60,26 +65,29 @@ describe('GridUtils module', () => {
     })
   })
 
-  describe('addPoints', () => {
+  describe('GridUtils.addPoints', () => {
     it('should add two points correctly', () => {
       expect(GridUtils.addPoints([1, 2], [3, 4])).toEqual([4, 6])
     })
   })
 
-  describe('subtractPoints', () => {
+  describe('GridUtils.subtractPoints', () => {
     it('should subtract two points correctly', () => {
       expect(GridUtils.subtractPoints([1, 2], [3, 4])).toEqual([2, 2])
     })
   })
 
-  describe('getNextPoint', () => {
-    it('should return the correct next point based on direction', () => {
+  describe('GridUtils.getNextPoint', () => {
+    it('should return the correct next point based on the movement to [-1, 0] (up)', () => {
       expect(GridUtils.getNextPoint([1, 1], { row: -1, col: 0 })).toEqual([0, 1])
+    })
+    // TODO: Check this
+    it('should return the correct next point based on the movement to [1, 1] (down/right)', () => {
       expect(GridUtils.getNextPoint([1, 1], { row: 1, col: 1 })).toEqual([2, 2])
     })
   })
 
-  describe('findValidDirections', () => {
+  describe('GridUtils.findValidDirections', () => {
     const grid = [
       ['@', '-', '-', 'A', '-', '+', null, null],
       [null, null, null, null, null, '|', null, null],
@@ -95,7 +103,7 @@ describe('GridUtils module', () => {
     })
   })
 
-  describe('getCharacterAt', () => {
+  describe('GridUtils.getCharacterAt', () => {
     const grid = [
       ['A', 'B', 'C'],
       [null, 'E', 'D'],

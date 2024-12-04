@@ -30,13 +30,21 @@ export const GridUtils = {
   },
 
   /**
-   * Checks if a point contains a valid character (not null)
-   * @param {Point} point - The point to check
-   * @param {Grid} grid - The grid
-   * @returns {boolean} True if the point contains a valid character
-   */
+ * Checks if a point contains a valid character.
+ * @param {Point} point - The point to check
+ * @param {Grid} grid - The grid
+ * @returns {boolean} True if the point contains a valid character
+ */
   isValidCell([row, col], grid) {
-    return this.isInBounds([row, col], grid) && grid[row][col] !== null
+    // Define the valid characters
+    const validChars = /^[A-Zx+\-|@]$/;
+
+    // Check bounds and character validity
+    return (
+      this.isInBounds([row, col], grid) &&
+      grid[row][col] !== null &&
+      validChars.test(grid[row][col])
+    );
   },
 
   /**

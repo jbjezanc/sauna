@@ -24,11 +24,13 @@ export const Path = {
    * @returns {Point|null} Next valid point or null
    */
   handleStartPosition(currentPoint, grid) {
-    const validNeighbors = GridUtils.findValidDirections(currentPoint, grid)
-    if (validNeighbors.length > 1) {
+    const validDirections = GridUtils.findValidDirections(currentPoint, grid)
+    if (validDirections.length > 1) {
       throw new Error('Multiple starting paths')
+    } else if (validDirections === 0) {
+      throw new Error('No valid directions')
     }
-    return validNeighbors[0] || null
+    return validDirections[0]
   },
 
   /**
@@ -116,35 +118,33 @@ export const Path = {
    */
   findPath(startChar, grid) {
     const start = GridUtils.findPoints(startChar, grid)[0]?.location
+    if (!start) {
+      throw new Error('Missing start character')
+    }
     const visited = [start]
     const path = [startChar]
     const letters = []
 
     let currentPoint = start
     let currentChar = startChar
-    let currentDirection = [0, 1] // Start moving right
+    let currentDirection = this.handleStartPosition(currentPoint, grid)
 
     while (true) {
       const nextPoints = GridUtils.findValidDirections(currentPoint, grid)
 
       // Check success condition
       if (currentChar === 'x') {
-        this.logResult('Success!', letters, path)
-        // return visited
         return { visited, letters, path }
       }
 
       // Check for broken path
       if (nextPoints.length === 0) {
-        this.logResult('Broken path', letters, path)
         throw new Error('Broken path')
       }
 
       // Determine next point based on current character type
       let nextPoint = null
-      if (currentChar === '@') {
-        nextPoint = this.handleStartPosition(currentPoint, grid)
-      } else if (/[A-Z]/.test(currentChar)) {
+      if (/[A-Z]/.test(currentChar)) {
         nextPoint = this.handleLetterPosition(
           currentPoint,
           nextPoints,
@@ -177,22 +177,8 @@ export const Path = {
         path.push(currentChar)
         visited.push(currentPoint)
       } else {
-        this.logResult('Failure', letters, path)
         throw new Error('Broken path')
       }
     }
-  },
-
-  /**
-   * Logs the result of path finding
-   * @param {string} status - Status message
-   * @param {LetterPosition[]} letters - Collected letters
-   * @param {string[]} path - Path characters
-   */
-  logResult(status, letters, path) {
-    // Keep this for manual test script
-    // console.log(status)
-    // console.log('Letters:', letters.map((l) => l.letter).join(''))
-    // console.log('Path as characters:', path.join(''))
   },
 }

@@ -231,3 +231,17 @@ Expected result: Error
 - the only valid characters are all uppercase letters (`A`-`Z`) and other characters appearing in the example maps; anything else found must result in an error
 - turns can be letters or `+`
 - input examples are jagged matrices - rows (lines) don't contain the same number of elements (characters): this is a valid form of input so keep that in mind
+
+## How to test it
+
+# Run all tests
+$ npm run test
+
+# Run only unit tests
+$ npm run test:unit
+
+# Run only integration tests
+$ npm run test:integration
+
+# Generate test coverage report
+$ npm run test:coverage

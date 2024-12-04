@@ -1,8 +1,8 @@
 import { GridValidator } from '../utils/grid-validator.js'
 import { GridUtils } from '../utils/grid-utils.js'
 
-describe('GridValidator', () => {
-  describe('validateGridStructure', () => {
+describe('GridValidator module', () => {
+  describe('GridValidator.validateGridStructure', () => {
     it('should throw an error for a non-array grid', () => {
       expect(() => GridValidator.validateGridStructure(null)).toThrow(
         GridValidator.ERROR_MESSAGES.INVALID_GRID
@@ -15,13 +15,6 @@ describe('GridValidator', () => {
       )
     })
 
-    it('should throw an error for a grid with uneven rows', () => {
-      const grid = [['@', '-'], ['x']]
-      expect(() => GridValidator.validateGridStructure(grid)).toThrow(
-        GridValidator.ERROR_MESSAGES.UNEVEN_ROWS
-      )
-    })
-
     it('should pass for a well-formed grid', () => {
       const grid = [
         ['@', '-', 'x'],
@@ -31,7 +24,7 @@ describe('GridValidator', () => {
     })
   })
 
-  describe('validateSpecialChar', () => {
+  describe('GridValidator.validateSpecialChar', () => {
     beforeEach(() => {
       jest.spyOn(GridUtils, 'findPoints')
     })
@@ -90,7 +83,7 @@ describe('GridValidator', () => {
     })
   })
 
-  describe('validateEndpoints', () => {
+  describe('GridValidator.validateEndpoints', () => {
     it('should throw an error if start or end points are invalid', () => {
       jest.spyOn(GridValidator, 'validateSpecialChar').mockImplementation(() => {
         throw new Error(GridValidator.ERROR_MESSAGES.NO_START)
@@ -122,7 +115,7 @@ describe('GridValidator', () => {
     })
   })
 
-  describe('validateGrid', () => {
+  describe('GridValidator.validateGrid', () => {
     it('should throw an error if the grid structure is invalid', () => {
       jest.spyOn(GridValidator, 'validateGridStructure').mockImplementation(() => {
         throw new Error(GridValidator.ERROR_MESSAGES.INVALID_GRID)
@@ -139,7 +132,7 @@ describe('GridValidator', () => {
         ['@', '-', '+'],
         [null, null, 'x'],
       ]
-      jest.spyOn(GridValidator, 'validateGridStructure').mockImplementation(() => {})
+      jest.spyOn(GridValidator, 'validateGridStructure').mockImplementation(() => { })
       jest.spyOn(GridValidator, 'validateEndpoints').mockReturnValue({
         startPoint: [0, 0],
         endPoint: [1, 2],
@@ -158,7 +151,7 @@ describe('GridValidator', () => {
     })
   })
 
-  describe('isValidGrid', () => {
+  describe('GridValidator.isValidGrid', () => {
     it('should return validation result if the grid is valid', () => {
       const grid = [
         ['@', '-', '+'],

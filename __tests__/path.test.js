@@ -2,17 +2,23 @@ import { Path } from '../path'
 import { GridUtils } from '../utils/grid-utils'
 
 describe('Path module', () => {
-  describe('isPerpendicular', () => {
-    it('returns true for perpendicular directions', () => {
+  describe('Path.isPerpendicular returns true for perpendicular directions', () => {
+    it('returns true for perpendicular directions: [1, 0] (down) and [0, 1] (to right)', () => {
       expect(Path.isPerpendicular([1, 0], [0, 1])).toBe(true)
+    })
+    it('returns true for perpendicular directions: [0, 1] (to right) and [-1, 0] (up)', () => {
       expect(Path.isPerpendicular([0, 1], [-1, 0])).toBe(true)
     })
-    it('returns false for non-perpendicular directions', () => {
+  })
+  describe('Path.isPerpendicular returns false for non-perpendicular directions', () => {
+    it('returns false for non-perpendicular directions: [1, 0] (down) and [-1, 0] (up)', () => {
       expect(Path.isPerpendicular([1, 0], [-1, 0])).toBe(false)
+    })
+    it('returns false for non-perpendicular directions: [0, 1] (right) and [0, -1] (left)', () => {
       expect(Path.isPerpendicular([0, 1], [0, -1])).toBe(false)
     })
   })
-  describe('handleStartPosition', () => {
+  describe('Path.handleStartPosition', () => {
     const grid = [
       [null, '+', '-', 'L', '-', '+', null, null],
       [null, '|', null, null, '+', 'A', '-', '+'],
@@ -43,8 +49,8 @@ describe('Path module', () => {
       )
     })
   })
-  describe('handleLetterPosition', () => {
-    it('should track letters and return the next point straight ahead in the current direction', () => {
+  describe('Path.handleLetterPosition', () => {
+    it('should return the next point straight ahead in the current direction', () => {
       const currentPoint = [1, 1]
       const nextPoints = [[1, 2]]
       const currentDirection = [0, 1]
@@ -64,10 +70,30 @@ describe('Path module', () => {
         currentChar
       )
       expect(result).toEqual([1, 2])
+    })
+    it('should track letters and match the correct letter found straight ahead in the current direction', () => {
+      const currentPoint = [1, 1]
+      const nextPoints = [[1, 2]]
+      const currentDirection = [0, 1]
+      const visited = [
+        [1, 0],
+        [1, 1],
+      ]
+      const letters = []
+      const currentChar = 'A'
+
+      const result = Path.handleLetterPosition(
+        currentPoint,
+        nextPoints,
+        currentDirection,
+        visited,
+        letters,
+        currentChar
+      )
       expect(letters).toContainEqual({ letter: 'A', point: [1, 1] })
     })
   })
-  describe('handleTurnPosition', () => {
+  describe('Path.handleTurnPosition', () => {
     // Mock GridUtils.subtractPoints since we're not testing its implementation
     beforeEach(() => {
       jest
@@ -83,9 +109,9 @@ describe('Path module', () => {
       // Setup
       const currentPoint = [1, 1]
       const nextPoints = [
-        [1, 2],
-        [2, 1],
-      ] // right and down options
+        [1, 2], // to right from the currentPoint
+        [2, 1], // down from the currentPoint
+      ]
       const currentDirection = [0, 1] // moving right
       const visited = [
         [1, 0],
@@ -136,7 +162,7 @@ describe('Path module', () => {
       }).toThrow('Fork in path')
     })
   })
-  describe('handleRegularPosition', () => {
+  describe('Path.handleRegularPosition', () => {
     it('should continue straight ahead if possible', () => {
       const currentPoint = [1, 1]
       const nextPoints = [
@@ -156,7 +182,7 @@ describe('Path module', () => {
         currentDirection,
         visited
       )
-      expect(result).toEqual([2, 1]) // Should continue straight
+      expect(result).toEqual([2, 1]) // Should continue straight ahead
     })
 
     it('should avoid the previous point and pick a valid alternative', () => {

@@ -4,7 +4,10 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose",
+    "test:unit": "jest --testPathPattern=__tests__ --verbose",
+    "test:integration": "jest --testPathPattern=tests/integration",
+    "test:coverage": "npx jest --coverage"
   },
   "keywords": [],
   "author": "Josip Bježanćević",

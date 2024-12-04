@@ -130,11 +130,11 @@ export const G12b = [
 
 // FORK IN PATH - OK
 export const G12c = [
-  [ "x", "-", "B"],
-  [ null, null, "|"],
-  [ "@", "-", "+"],
-  [ null, null, "|"],
-  [ null, '-', "+"],
+  ["x", "-", "B"],
+  [null, null, "|"],
+  ["@", "-", "+"],
+  [null, null, "|"],
+  [null, '-', "+"],
 ]
 
 // Broken path OK
@@ -146,16 +146,16 @@ export const G13 = [
 ]
 
 // MULTIPLE STARTING PATHS (valid) / OK / First Multiple end characters kicks in 
-export const G14a = [["x", "-", "B", "-", "@", "-", "A",  "-", "x"]]
+export const G14a = [["x", "-", "B", "-", "@", "-", "A", "-", "x"]]
 
 // MULTIPLE STARTING PATHS (valid) / OK 
-export const G14b = [["x", "-", "B", "-", "@", "-", "A",  "-", "-"]]
+export const G14b = [["x", "-", "B", "-", "@", "-", "A", "-", "-"]]
 
 // FAKE TURN - OK
 export const G15 = [["@", "-", "A", "-", "+", "-", "B", "-", "x"]]
 
 // MULTIPLE STARTING PATHS - OK
-export const G16 = [["x", "-", "B", "-", "@", "-", "A",  "-", "-"]]
+export const G16 = [["x", "-", "B", "-", "@", "-", "A", "-", "-"]]
 
 // MULTIPLE ENDINGS - Multiple end characters kicks in.
-export const G17 = [["x", "-", "B", "-", "@", "-", "A",  "-", "x"]]
+export const G17 = [["x", "-", "B", "-", "@", "-", "A", "-", "x"]]
